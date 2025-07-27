@@ -82,7 +82,8 @@ public class UIManager : MonoBehaviour
     public void ShowGameOver()
     {
         ShowStatus("Game Over!");
-        gameOverPanel.SetActive(true);
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
     }
     private void OnStartGame()
     {

@@ -13,7 +13,8 @@ public class GameController : MonoBehaviour
 
     private List<CardController> flippedCards = new List<CardController>();
 
-
+    private int totalPairs;
+    private int matchedPairs;
 
 
     public void StartGameWithLayout(int row, int col)
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour
     }
     private void GenerateGrid(int row, int cols)
     {
+        totalPairs = (row * cols) / 2;
+        matchedPairs = 0;
         List<CardData> cardAssets = new List<CardData>(Resources.LoadAll<CardData>("CardData"));
         List<CardData> pairedCards = new List<CardData>();
 
@@ -50,6 +53,7 @@ public class GameController : MonoBehaviour
         if (flippedCards.Count == 2)
         {
             StartCoroutine(Checkmatch());
+
         }
     }
     IEnumerator Checkmatch()
@@ -63,7 +67,9 @@ public class GameController : MonoBehaviour
             a.MarkAsMAtched();
             b.MarkAsMAtched();
             score += 10;
+            matchedPairs++;
             UIManager.Instance.ShowStatus("Match!");
+            AudioManager.Instance.Play("Match");
         }
         else
         {
@@ -71,6 +77,13 @@ public class GameController : MonoBehaviour
             b.ResetCard();
             score -= 1;
             UIManager.Instance.ShowStatus("Mismatch!");
+            AudioManager.Instance.Play("Mismatch");
+        }
+        if (matchedPairs >= totalPairs)
+        {
+            UIManager.Instance.ShowStatus("All matched!");
+            AudioManager.Instance.Play("GameOver");
+            UIManager.Instance.ShowGameOver(); // This shows a panel
         }
         UIManager.Instance.UpdateScore(score);
         flippedCards.Clear();

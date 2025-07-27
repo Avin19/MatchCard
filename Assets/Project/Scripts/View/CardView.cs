@@ -21,6 +21,7 @@ public class CardView : MonoBehaviour
     {
         if (flipped != isFrontVisible)
             StartCoroutine(AnimateFlip(flipped));
+        AudioManager.Instance.Play("Flip");
     }
     private IEnumerator AnimateFlip(bool showFront)
     {
