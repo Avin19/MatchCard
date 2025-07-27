@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: C0 4
   m_EditorClassIdentifier: 
   cardID: 3
-  frontSprite: {fileID: 21300000, guid: 5e55714f51a22b84ab99f87631d863af, type: 3}
-  backSprite: {fileID: 21300000, guid: ee43c0990bbd96c47b748e5eaed0aed5, type: 3}
+  frontSprite: {fileID: 21300000, guid: 86cff97586e9e1d49a174930d801e0b1, type: 3}

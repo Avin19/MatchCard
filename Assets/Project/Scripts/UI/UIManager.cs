@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using System;
+using System.Collections;
 
 
 public class UIManager : MonoBehaviour
@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI statusText;
+    private Coroutine statusResetCoroutine;
 
     void Awake()
     {
@@ -60,14 +61,24 @@ public class UIManager : MonoBehaviour
             scoreText.text = "Score: " + score;
         }
     }
-    public void ShowStatus(string message)
+    public void ShowStatus(string message, float clearAfterSeconds = 0.5f)
     {
         if (statusText != null)
         {
             statusText.text = message;
+
+            if (statusResetCoroutine != null)
+                StopCoroutine(statusResetCoroutine);
+
+            statusResetCoroutine = StartCoroutine(ClearStatusAfterDelay(clearAfterSeconds));
         }
     }
 
+    private IEnumerator ClearStatusAfterDelay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        statusText.text = "";
+    }
     public void ShowGameOver()
     {
         ShowStatus("Game Over!");

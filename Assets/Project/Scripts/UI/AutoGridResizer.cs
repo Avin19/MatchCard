@@ -9,6 +9,7 @@ public class AutoGridResizer : MonoBehaviour
     [SerializeField] private Vector2 spacing = new Vector2(10, 10);
 
     [SerializeField] private Vector2 padding = new Vector2(20, 20);
+    [SerializeField] private Vector2 cardSize = new Vector2(160, 120);
     [SerializeField] private GridLayoutGroup grid;
     [SerializeField] private RectTransform container;
     private int rows, cols;
@@ -34,5 +35,6 @@ public class AutoGridResizer : MonoBehaviour
         cols = newCols;
         ResizeGrid();
     }
+
 
 }
